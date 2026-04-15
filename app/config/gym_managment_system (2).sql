@@ -60,6 +60,31 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `singup_sp` (IN `_id` VARCHAR(250) C
     VALUES (_id, _full_name, _username, _email, _phone, _password, _image, _role_id, 'Active');
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `read_all_categories_sp` (IN `_search` VARCHAR(250), IN `_limit` INT, IN `_offset` INT)   BEGIN
+    DECLARE _total INT;
+    SELECT COUNT(*) INTO _total FROM category WHERE name LIKE CONCAT('%', _search, '%');
+    
+    SELECT *, _total as TotalCount FROM category WHERE name LIKE CONCAT('%', _search, '%') ORDER BY id DESC LIMIT _limit OFFSET _offset;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `read_all_links_sp` (IN `_search` VARCHAR(250), IN `_limit` INT, IN `_offset` INT)   BEGIN
+    DECLARE _total INT;
+    SELECT COUNT(*) INTO _total FROM system_links WHERE name LIKE CONCAT('%', _search, '%');
+    
+    SELECT sl.*, c.name as category_name, _total as TotalCount FROM system_links sl 
+    LEFT JOIN category c ON sl.category_id = c.id
+    WHERE sl.name LIKE CONCAT('%', _search, '%') ORDER BY sl.id DESC LIMIT _limit OFFSET _offset;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `read_all_system_actions_sp` (IN `_search` VARCHAR(250), IN `_limit` INT, IN `_offset` INT)   BEGIN
+    DECLARE _total INT;
+    SELECT COUNT(*) INTO _total FROM system_actions WHERE name LIKE CONCAT('%', _search, '%');
+    
+    SELECT sa.*, sl.name as link_name, _total as TotalCount FROM system_actions sa 
+    LEFT JOIN system_links sl ON sa.link_id = sl.id
+    WHERE sa.name LIKE CONCAT('%', _search, '%') ORDER BY sa.id DESC LIMIT _limit OFFSET _offset;
+END$$
+
 DELIMITER ;
 
 -- --------------------------------------------------------

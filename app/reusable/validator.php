@@ -1,20 +1,22 @@
 <?php
-function validate($data) {
-    if ($data === null) return '';
-    $data = trim($data);
-    $data = stripslashes($data);
-    // Removed htmlspecialchars() so DB stores raw (safe via prepared statements), enabling easy API/mobile reuse.
-    // Ensure you use htmlspecialchars() ON OUTPUT in views!
-    return $data;
+if (!function_exists('validate')) {
+    function validate($data) {
+        if ($data === null) return '';
+        $data = trim($data);
+        $data = stripslashes($data);
+        return $data;
+    }
 }
 
-function checkRequired($fields) {
-    foreach ($fields as $field) {
-        if (empty($_POST[$field])) {
-            return false;
+if (!function_exists('checkRequired')) {
+    function checkRequired($fields) {
+        foreach ($fields as $field) {
+            if (!isset($_POST[$field]) || $_POST[$field] === '') {
+                return false;
+            }
         }
+        return true;
     }
-    return true;
 }
 
 // example 

@@ -34,6 +34,8 @@ require_once __DIR__ . '/conn.php';
 require_once __DIR__ . '/security.php';
 require_once __DIR__ . '/../reusable/response.php';
 require_once __DIR__ . '/../reusable/validator.php';
+require_once __DIR__ . '/../reusable/db_crud_helper.php';
+require_once __DIR__ . '/../reusable/variables.php';
 
 
 //  * Check if the current user has access to a specific page

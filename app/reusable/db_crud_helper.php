@@ -17,7 +17,12 @@ function create($conn, $table, $data) {
 }
 
 //Read All
-function read_all($conn, $table, $extra_sql = "") {
+function db_read_all($conn, $table, $extra_sql = "") {
+    $sql = "SELECT * FROM `$table` $extra_sql";
+    $result = $conn->query($sql);
+    return $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
+}
+function db_read($conn, $table, $extra_sql = "") {
     $sql = "SELECT * FROM `$table` $extra_sql";
     $result = $conn->query($sql);
     return $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
@@ -73,7 +78,7 @@ function create_sp($conn, $sp_name, $data) {
 }
 
 // Read All SP
-function read_all_sp($conn, $sp_name, $data = []) {
+function db_read_all_sp($conn, $sp_name, $data = []) {
     if (empty($data)) {
         $result = $conn->query("CALL `$sp_name`()");
         $data_result = $result ? $result->fetch_all(MYSQLI_ASSOC) : [];

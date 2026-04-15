@@ -34,8 +34,6 @@
     <!-- displayMessage -->
     <script src="<?php echo BASE_URL; ?>reusable/displayMessage.js"></script>
 
-    <!-- SweetAlert2 -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
         /* Custom Scrollbar */

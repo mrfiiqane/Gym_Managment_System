@@ -9,6 +9,7 @@ module.exports = {
   content: [
     "./app/views/**/*.php",
     "./app/views/**/*.html",
+    "./app/reusable/**/*.{php,js}",
     "./app/js/**/*.js",
     "./index.php"
   ],

@@ -1,9 +1,6 @@
 <?php
 require_once '../config/init.php';
-include '../reusable/response.php';
-include '../reusable/validator.php';
-include '../reusable/db_crud_helper.php';
-include '../config/conn.php';
+// Note: response.php, validator.php, and db_crud_helper.php are waxay ku jiran init.php 
 
 $action = validate($_POST['action'] ?? "");
 
@@ -23,7 +20,8 @@ function register_category($conn)
     if (create($conn, 'category', $data)) {
         sendResponse(true, "Category Registered Successfully");
     } else {
-        sendResponse(false, "Failed to register category or it already exists");
+        // Log error and send it to identify rejection cause
+        sendResponse(false, "Failed to register category: " . $conn->error);
     }
 }
 
@@ -44,35 +42,23 @@ function update_category($conn)
     if (update($conn, 'category', $data, $id)) {
         sendResponse(true, "Category Updated Successfully");
     } else {
-        sendResponse(false, "Failed to update category");
+        sendResponse(false, "Failed to update category: " . $conn->error);
     }
 }
 
-// 3. READ ALL 
-function read_all($conn)
+// 3. READ ALL (Using SP)
+function read_all_categories($conn)
 {
     $search = validate($_POST['p_search'] ?? '');
     $limit  = (int)($_POST['p_limit'] ?? 10);
     $offset = (int)($_POST['p_offset'] ?? 0);
 
-    // Get Total Count
-    $countSql = "SELECT COUNT(*) as total FROM category WHERE name LIKE CONCAT('%', ?, '%')";
-    $countStmt = $conn->prepare($countSql);
-    $countStmt->bind_param("s", $search);
-    $countStmt->execute();
-    $totalCount = $countStmt->get_result()->fetch_assoc()['total'];
+    $data = db_read_all_sp($conn, 'read_all_categories_sp', [$search, $limit, $offset]);
 
-    // Get Data
-    $sql = "SELECT *, ? as TotalCount FROM category WHERE name LIKE CONCAT('%', ?, '%') ORDER BY id DESC LIMIT ? OFFSET ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("isii", $totalCount, $search, $limit, $offset);
-
-    if ($stmt->execute()) {
-        $result = $stmt->get_result();
-        $data = $result->fetch_all(MYSQLI_ASSOC);
-        sendResponse(true, "Categories retrieved", $data);
+    if ($data !== false) {
+        sendResponse(true, "Categories retrieved successfully", $data);
     } else {
-        sendResponse(false, "Failed to fetch categories");
+        sendResponse(false, "Failed to fetch categories via SP");
     }
 }
 
@@ -119,7 +105,7 @@ function delete_category($conn)
 $allowedActions = [
     "register_category"  => "register_category",
     "update_category"    => "update_category",
-    "read_all"           => "read_all",
+    "read_all"           => "read_all_categories",
     "read_info"          => "read_info",
     "delete_category"    => "delete_category",
 ];
@@ -128,7 +114,5 @@ if (!isset($allowedActions[$action])) {
     sendResponse(false, "Invalid or Missing Action");
 }
 
-// Fulinta function-ka loo baahanyahay
 $allowedActions[$action]($conn);
-
-$conn->close();
+$conn->close();
