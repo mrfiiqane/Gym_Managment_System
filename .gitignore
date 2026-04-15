@@ -1,0 +1,35 @@
+# ===========================================
+# OnlineSchool - Git Ignore File
+# ===========================================
+
+# Environment Variables - NEVER commit these!
+.env
+
+# XAMPP / PHP specific
+*.log
+*.cache
+
+# Upload folders (user data)
+app/uploads/User_profile/*
+app/uploads/course_thumbnails/*
+
+# Keep folder structure but ignore contents
+!app/uploads/User_profile/.gitkeep
+!app/uploads/course_thumbnails/.gitkeep
+
+# Node modules (Tailwind build)
+node_modules/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Trash/temp folders
+app/trash/
+trash/

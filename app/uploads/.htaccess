@@ -1,0 +1,12 @@
+# Prevent access to upload files directly (except thumbnails)
+<FilesMatch "\.(php|phtml|sh|exe)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Allow limited image viewing but no directory listing
+Options -Indexes
+
+
+php_flag engine off
+Options -Indexes

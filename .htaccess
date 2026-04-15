@@ -1,0 +1,18 @@
+# Farxaan School Master .htaccess
+
+# Deny access to sensitive files
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Prevent directory listing
+Options -Indexes
+
+# Error handling
+ErrorDocument 403 /OnlineSchool/app/views/errors/403.php
+ErrorDocument 404 /OnlineSchool/app/views/errors/404.php
+ErrorDocument 500 /OnlineSchool/app/views/errors/500.php
+
+# Prepend OnlineSchool for local subfolder if needed, 
+# but ErrorDocument with absolute path is usually safest in XAMPP.

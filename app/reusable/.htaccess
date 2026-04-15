@@ -1,0 +1,24 @@
+# Custom Error Pages
+ErrorDocument 404 /EMS/app/views/Errors/404.php
+ErrorDocument 403 /EMS/app/views/Errors/403.php
+ErrorDocument 500 /EMS/app/views/Errors/500.php
+
+# Security: Prevent directory browsing
+Options -Indexes
+
+# Protect sensitive files
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+<Files "config.php">
+    Order allow,deny
+    Deny from all
+</Files>
+
+<Files "init.php">
+    Order allow,deny
+    Deny from all
+</Files>
+
