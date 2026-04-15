@@ -23,7 +23,7 @@ load_env();
 
 // Global Application Configuration
 define('APP_NAME', 'FitCore Gym Management System');
-define('APP_VERSION', '1.0.0');
+define('APP_VERSION', '2.0.0');
 // Dynamically get the base URL to avoid port and domain issues
 $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https://' : 'http://';
 $host = $_SERVER['HTTP_HOST'] ?? 'localhost';

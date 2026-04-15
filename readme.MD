@@ -1,44 +1,72 @@
 # FitCore — Gym Management System v2.0.0
 
-FitCore is a modern, full-stack Gym Management System designed with premium aesthetics and a robust "Generic CRUD" architecture. It features a dynamic permission system, real-time AJAX interactions, and a clean backend powered by Stored Procedures.
+![PHP](https://img.shields.io/badge/PHP-8.1-blue?style=for-the-badge&logo=php)
+![MySQL](https://img.shields.io/badge/MySQL-Database-orange?style=for-the-badge&logo=mysql)
+![Tailwind](https://img.shields.io/badge/Tailwind-CSS-38B2AC?style=for-the-badge&logo=tailwind-css)
+![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge&logo=github)
 
-![Dashboard Preview](MVC.png)
-
-## 🚀 Key Features
-
-### 1. Dynamic Sidebar & Permission System
-The specialized sidebar adapts automatically to the user's authority level. The structure follows a hierarchical flow:
-- **Category**: High-level modules (e.g., Dashboard, Finance, Reports).
-- **System Links**: Individual pages within a category (e.g., Users list, Payments).
-- **System Actions**: Specific permissions within a page (e.g., Register User, Delete Link).
-- **User Authority**: A mapping table that grants specific actions to users, causing the sidebar to render only what they are allowed to see.
-
-### 2. Modern Authentication & Security
-- **Secure Auth Flow**: Password hashing with `password_hash()` and session protection.
-- **OTP Verification**: Integrated password recovery using PHPMailer to send secure codes via Gmail SMTP.
-- **RBAC (Role-Based Access Control)**: Granular permissions for Admins and regular Users.
-
-### 3. Progressive Frontend & Languages
-- **Bilingual Support**: Fully localized for **Somali (Somali)** and **English (English)** to cater to a global and local audience.
-- **Dark & Light Mode**: Seamless theme switching with persistent user preference storage.
-- **Premium Design System**: Glassmorphism aesthetics, scroll-reveal animations, and high-quality iconography.
-- **Interactive UI**: Custom-built, high-performance **Toast** and **ConfirmBox** components for a premium user experience.
-
-### 4. Performance & Architecture
-- **Stored Procedures (SPs)**: Core database logic moved to the server side for maximum speed and security.
-- **Generic CRUD Helper**: A unified `db_crud_helper.php` provides a standard, secure way to handle all database interactions.
-- **Neural & Ethereal Glows**: State-of-the-art UI backgrounds and micro-interactions for an immersive feel.
+FitCore is a high-performance, full-stack Gym Management System designed with premium aesthetics and a robust "Generic CRUD" architecture. It features a dynamic permission system, real-time AJAX interactions, and a clean backend powered by Stored Procedures.
 
 ---
 
-## 🛠️ Tech Stack
+## 🌐 Live Demo
+- **🔗 URL**: [https://fitcore-gym.com](#) *(Deploy to InfinityFree/Render to activate)*
+- **🔐 Demo Login**:
+  - **Email**: `admin@test.com`
+  - **Password**: `123456`
 
-- **Backend**: PHP 8.1+ (Engine)
-- **Database**: MySQL (using Stored Procedures)
-- **Frontend**: TailwindCSS (UI), JavaScript (Core), jQuery (AJAX Interactions)
-- **Email Service**: PHPMailer (SMTP Integration)
-- **Typography**: Plus Jakarta Sans, Outfit, and Material Symbols
-- **Design Style**: Glassmorphism & Modern Minimalist
+---
+
+## 📸 Screenshots
+
+| Dashboard | Users Management |
+| :--- | :--- |
+| ![Dashboard](screenshots/dashboard.png) | ![Users](screenshots/users.png) |
+
+| Permissions System | Profile Settings |
+| :--- | :--- |
+| ![Permissions](screenshots/permissions.png) | ![Profile](screenshots/profile.png) |
+
+---
+
+## 🚀 Key Features
+
+### 1. Dynamic RBAC Permission System
+The specialized sidebar adapts automatically to the user's authority level using a hierarchical mapping:
+**Category** ➔ **System Links** ➔ **System Actions** ➔ **User Authority**.
+
+### 2. High-Performance Architecture
+- **Stored Procedures (SPs)**: Core database logic is offloaded to MySQL for maximum speed and security.
+- **Generic CRUD Framework**: A unified PHP/AJAX system that handles operations for all modules, ensuring 100% DRY code.
+- **Real-time AJAX**: No page reloads for a seamless SPA-like feel.
+
+### 3. Premium UI/UX
+- **Glassmorphism Design**: Modern blurred panels and neural glow backgrounds.
+- **Bilingual Support**: Fully localized for **Somali** and **English**.
+- **Dark/Light Mode**: Full theme support with persistent preferences.
+
+---
+
+## 🧠 System Flow
+
+1. **Authentication**: User logs in; session is established with role-based tagging.
+2. **Permission Fetching**: `user_authorities.php` checks allowed actions for the user.
+3. **Menu Rendering**: `sidebar.js` calls the API and dynamically builds the menu.
+4. **Action Execution**: Every action (Create/Edit/Delete) is validated against the permission map before hitting the Stored Procedure.
+
+---
+
+## 🔌 API Endpoints (Samples)
+
+### User Login
+`POST /app/api/Auth/login.php`
+- **Body**: `{ email, password }`
+- **Response**: `{ status: true, message: "Welcome...", data: { user_id, role } }`
+
+### Fetch Dynamic Menu
+`POST /app/api/user_authorities.php`
+- **Action**: `get_User_Menus`
+- **Response**: Returns a JSON tree of Categories and authorized Links.
 
 ---
 
@@ -99,48 +127,58 @@ Gym_Managment_System/
 
 ---
 
-## ⚙️ Installation & Setup
+## ⚙️ Setup & Installation
 
-1. **Clone the project**:
-   ```bash
-   git clone https://github.com/mrfiiqane/Gym_Managment_System.git
+### 📋 Requirements
+- **PHP**: `8.1` or higher
+- **Database**: `MySQL 5.7` or higher
+- **Server**: Apache (XAMPP / WampServer)
+
+### 🚀 Installation Steps
+1. **Clone**: `git clone https://github.com/mrfiiqane/Gym_Managment_System.git`
+2. **Database**: Import `app/config/gym_managment_system (2).sql` into your PHPMyAdmin.
+3. **Environment**: Update your `.env` file:
+   ```env
+   DB_HOST=localhost
+   DB_NAME=gym_managment_system
+   DB_USER=root
+   DB_PASS=
+
+   MAIL_HOST=smtp.gmail.com
+   MAIL_USER=your-email@gmail.com
+   MAIL_PASS=your-app-password
    ```
-
-2. **Database Setup**:
-   - Create a database named `gym_managment_system`.
-   - Import the `app/config/gym_managment_system (2).sql` file.
-
-3. **Configure Environment**:
-   - Rename `.env.example` to `.env` (if applicable) or edit the existing `.env`.
-   - Update your SMTP credentials for the OTP system:
-     ```env
-     MAIL_HOST=smtp.gmail.com
-     MAIL_USER=your-email@gmail.com
-     MAIL_PASS=your-app-password
-     MAIL_PORT=587
-     ```
-
-4. **Run with XAMPP**:
-   - Place the folder in `C:\xampp\htdocs\`.
-   - Start Apache and MySQL from XAMPP Control Panel.
-   - Visit `http://localhost/Gym_Managment_system/`.
+4. **Run**: Access via `http://localhost/Gym_Managment_system/`
 
 ---
 
-## 💎 Core Principles
-
-| Principle | Implementation in FitCore |
-| :--- | :--- |
-| **🚀 Performance** | **10/10** — Logic is offloaded to MySQL **Stored Procedures**, reducing network latency and CPU load. Real-time updates utilize ultra-fast AJAX queries without full page reloads. |
-| **🛡️ Security** | **10/10** — Protection against SQL Injection via **Prepared Statements**. Features centralized `validator.php` for input cleaning, session identification tagging, and CSRF protection modules. |
-| **✨ Clean Code** | **10/10** — Follows a modular **SOLID/DRY** architecture. Every API endpoint is entity-aware, and responses are standardized through a single `sendResponse()` function. |
-| **♻️ Reusability** | **10/10** — The **Generic CRUD Framework** (`db_crud_helper.php`) and Unified UI Helpers (`helper.js`) allow for effortless scalability and consistent behavior across all modules. |
-| **📋 Maintainability**| **10/10** — Adding a new module is as simple as creating a new SQL table and using the existing action mapping logic. |
+## 💎 Technical Principles
+- **Clean Code**: SOLID/DRY principle implementation.
+- **Security**: SQL Prepared Statements & CSRF Protection.
+- **Scalability**: Add new modules in minutes via the Permission Map.
 
 ---
 
-## 📝 License
-This project is licensed under the MIT License.
+## 🚧 Roadmap
+- [ ] Mobile App Integration (Flutter)
+- [ ] AI-based Member Attendance Tracking
+- [ ] Automated Subscription Billing (Stripe/PayPal)
+- [ ] Advanced Financial Analytics Dashboard
 
 ---
-Created by **Mr. Fiiqane**
+
+## 🛡️ Known Issues
+- Google OAuth is under testing.
+- Shared hosting may require specific SP permissions from the provider.
+
+---
+
+## 🤝 Contributing
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+---
+Created with ❤️ by **Mr. Fiiqane**
