@@ -1,22 +1,11 @@
 <?php
 require_once  '../config/init.php';
-header("Content-Type: application/json");
+include '../reusable/response.php';
+include '../reusable/validator.php';
+include '../reusable/db_crud_helper.php';
 include '../config/conn.php';
 
-$action = $_POST['action'] ?? "";
-
-// 1. Function-ka Response-ka
-function sendResponse($status, $data)
-{
-    echo json_encode(["status" => $status, "data" => $data]);
-    exit;
-}
-
-// 2. Function-ka Sanitization
-function cleanInput($conn, $data)
-{
-    return mysqli_real_escape_string($conn, htmlspecialchars(strip_tags(trim($data))));
-}
+$action = validate($_POST['action'] ?? "");
 
 // readall links pages on views folder 
 function read_all_system_links($conn)
@@ -33,61 +22,57 @@ function read_all_system_links($conn)
     }
 
     if (count($array_data) > 0) {
-        sendResponse(true, $array_data);
+        sendResponse(true, "Links found", $array_data);
     } else {
         sendResponse(false, "No Link Found");
     }
 }
 
-// 3. INSERT 
+// 1. INSERT 
 function register_links($conn)
 {
-    $name = cleanInput($conn, $_POST['name']);
-    $link = cleanInput($conn, $_POST['link_id']);
-    $category = (int)($_POST['category'] ?? 0);
-
-    if (empty($name) || empty($link) || empty($category)) {
+    if (!checkRequired(['name', 'link_id', 'category'])) {
         sendResponse(false, "All fields are required");
     }
 
-    $sql = "INSERT INTO system_links (`name`, `link`, `category_id`) VALUES (?, ?, ?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssi", $name, $link, $category);
+    $data = [
+        'name' => validate($_POST['name']),
+        'link' => validate($_POST['link_id']),
+        'category_id' => (int)$_POST['category']
+    ];
 
-    if ($stmt->execute()) {
+    if (create($conn, 'system_links', $data)) {
         sendResponse(true, "Link Registered Successfully");
     } else {
-        sendResponse(false, $conn->error);
+        sendResponse(false, "Failed to register link");
     }
 }
 
-// 4. UPDATE
+// 2. UPDATE
 function update_links($conn)
 {
-    $id = (int)($_POST['id'] ?? 0);
-    $name = cleanInput($conn, $_POST['name']);
-    $link = cleanInput($conn, $_POST['link_id']);
-    $category = (int)($_POST['category'] ?? 0);
-
-    if (empty($id) || empty($name) || empty($link) || empty($category)) {
+    if (!checkRequired(['id', 'name', 'link_id', 'category'])) {
         sendResponse(false, "All fields are required");
     }
 
-    $sql = "UPDATE system_links SET `name`=?, `link`=?, `category_id`=? WHERE id=?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssii", $name, $link, $category, $id);
+    $id = (int)$_POST['id'];
+    $data = [
+        'name' => validate($_POST['name']),
+        'link' => validate($_POST['link_id']),
+        'category_id' => (int)$_POST['category']
+    ];
 
-    if ($stmt->execute()) {
+    if (update($conn, 'system_links', $data, $id)) {
         sendResponse(true, "Link Updated Successfully");
     } else {
-        sendResponse(false, $conn->error);
+        sendResponse(false, "Failed to update link");
     }
 }
 
-// 5. READ ALL
+// 3. READ ALL
 function read_all($conn)
 {
-    $search = cleanInput($conn, $_POST['p_search'] ?? '');
+    $search = validate($_POST['p_search'] ?? '');
     $limit  = (int)($_POST['p_limit'] ?? 10);
     $offset = (int)($_POST['p_offset'] ?? 0);
 
@@ -110,16 +95,20 @@ function read_all($conn)
     if ($stmt->execute()) {
         $result = $stmt->get_result();
         $data = $result->fetch_all(MYSQLI_ASSOC);
-        sendResponse(true, $data);
+        sendResponse(true, "Links retrieved", $data);
     } else {
-        sendResponse(false, $conn->error);
+        sendResponse(false, "Failed to fetch links");
     }
 }
 
-// 6. READ SINGLE
+// 4. READ SINGLE
 function read_info($conn)
 {
-    $id = (int)($_POST['id'] ?? 0);
+    if (!checkRequired(['id'])) {
+        sendResponse(false, "ID is required");
+    }
+    
+    $id = (int)$_POST['id'];
     $sql = "SELECT * FROM system_links WHERE id=?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $id);
@@ -127,24 +116,25 @@ function read_info($conn)
     if ($stmt->execute()) {
         $result = $stmt->get_result();
         $data = $result->fetch_assoc();
-        sendResponse(true, $data);
+        sendResponse(true, "Link retrieved", $data);
     } else {
-        sendResponse(false, $conn->error);
+        sendResponse(false, "Failed to fetch link");
     }
 }
 
-// 7. DELETE
+// 5. DELETE
 function delete_links($conn)
 {
-    $id = (int)($_POST['id'] ?? 0);
-    $sql = "DELETE FROM system_links WHERE id=?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $id);
-
-    if ($stmt->execute()) {
+    if (!checkRequired(['id'])) {
+        sendResponse(false, "ID is required");
+    }
+    
+    $id = (int)$_POST['id'];
+    
+    if (delete($conn, 'system_links', $id)) {
         sendResponse(true, "Link Deleted Successfully");
     } else {
-        sendResponse(false, $conn->error);
+        sendResponse(false, "Failed to delete link");
     }
 }
 
@@ -160,7 +150,7 @@ $allowedActions = [
     "read_all_system_links" => "read_all_system_links",
 ];
 
-if ($action === "" || !isset($allowedActions[$action])) {
+if (!isset($allowedActions[$action])) {
     sendResponse(false, "Invalid or Missing Action");
 }
 

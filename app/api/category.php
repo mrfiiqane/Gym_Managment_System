@@ -1,72 +1,57 @@
 <?php
 require_once '../config/init.php';
-header("Content-Type: application/json");
+include '../reusable/response.php';
+include '../reusable/validator.php';
+include '../reusable/db_crud_helper.php';
 include '../config/conn.php';
 
-$action = $_POST['action'] ?? "";
+$action = validate($_POST['action'] ?? "");
 
-// 1. Function-ka Response-ka
-function sendResponse($status, $data)
-{
-    echo json_encode(["status" => $status, "data" => $data]);
-    exit;
-}
-
-// 2. Function-ka Sanitization
-function cleanInput($conn, $data)
-{
-    return mysqli_real_escape_string($conn, htmlspecialchars(strip_tags(trim($data))));
-}
-
-// 3. INSERT 
+// 1. INSERT 
 function register_category($conn)
 {
-    $name = cleanInput($conn, $_POST['name']);
-    $icon = cleanInput($conn, $_POST['icon']);
-    $role = cleanInput($conn, $_POST['role']);
-
-    if (empty($name) || empty($icon) || empty($role)) {
+    if (!checkRequired(['name', 'icon', 'role'])) {
         sendResponse(false, "All fields are required");
     }
 
-    $sql = "INSERT INTO category (`name`, `icon`, `role`) VALUES (?, ?, ?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sss", $name, $icon, $role);
+    $data = [
+        'name' => validate($_POST['name']),
+        'icon' => validate($_POST['icon']),
+        'role' => validate($_POST['role'])
+    ];
 
-    if ($stmt->execute()) {
+    if (create($conn, 'category', $data)) {
         sendResponse(true, "Category Registered Successfully");
     } else {
-        sendResponse(false, $conn->error);
+        sendResponse(false, "Failed to register category or it already exists");
     }
 }
 
-// 4. UPDATE
+// 2. UPDATE
 function update_category($conn)
 {
-    $id   = (int)$_POST['id'];
-    $name = cleanInput($conn, $_POST['name']);
-    $icon = cleanInput($conn, $_POST['icon']);
-    $role = cleanInput($conn, $_POST['role']);
-
-    if (empty($id) || empty($name) || empty($icon) || empty($role)) {
+    if (!checkRequired(['id', 'name', 'icon', 'role'])) {
         sendResponse(false, "All fields are required");
     }
 
-    $sql = "UPDATE category SET `name`=?, `icon`=?, `role`=? WHERE id=?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sssi", $name, $icon, $role, $id);
+    $id = (int)$_POST['id'];
+    $data = [
+        'name' => validate($_POST['name']),
+        'icon' => validate($_POST['icon']),
+        'role' => validate($_POST['role'])
+    ];
 
-    if ($stmt->execute()) {
+    if (update($conn, 'category', $data, $id)) {
         sendResponse(true, "Category Updated Successfully");
     } else {
-        sendResponse(false, $conn->error);
+        sendResponse(false, "Failed to update category");
     }
 }
 
-// 5. READ ALL 
+// 3. READ ALL 
 function read_all($conn)
 {
-    $search = cleanInput($conn, $_POST['p_search'] ?? '');
+    $search = validate($_POST['p_search'] ?? '');
     $limit  = (int)($_POST['p_limit'] ?? 10);
     $offset = (int)($_POST['p_offset'] ?? 0);
 
@@ -85,15 +70,19 @@ function read_all($conn)
     if ($stmt->execute()) {
         $result = $stmt->get_result();
         $data = $result->fetch_all(MYSQLI_ASSOC);
-        sendResponse(true, $data);
+        sendResponse(true, "Categories retrieved", $data);
     } else {
-        sendResponse(false, $conn->error);
+        sendResponse(false, "Failed to fetch categories");
     }
 }
 
-// 6. READ SINGLE 
+// 4. READ SINGLE 
 function read_info($conn)
 {
+    if (!checkRequired(['id'])) {
+        sendResponse(false, "ID is required");
+    }
+    
     $id = (int)$_POST['id'];
     $sql = "SELECT * FROM category WHERE id=?";
     $stmt = $conn->prepare($sql);
@@ -102,24 +91,25 @@ function read_info($conn)
     if ($stmt->execute()) {
         $result = $stmt->get_result();
         $data = $result->fetch_assoc();
-        sendResponse(true, $data);
+        sendResponse(true, "Category retrieved", $data);
     } else {
-        sendResponse(false, $conn->error);
+        sendResponse(false, "Failed to fetch category");
     }
 }
 
-// 7. DELETE
+// 5. DELETE
 function delete_category($conn)
 {
-    $id = (int)$_POST['id'];
-    $sql = "DELETE FROM category WHERE id=?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $id);
+    if (!checkRequired(['id'])) {
+        sendResponse(false, "ID is required");
+    }
 
-    if ($stmt->execute()) {
+    $id = (int)$_POST['id'];
+    
+    if (delete($conn, 'category', $id)) {
         sendResponse(true, "Category Deleted Successfully");
     } else {
-        sendResponse(false, $conn->error);
+        sendResponse(false, "Failed to delete category");
     }
 }
 
@@ -134,7 +124,7 @@ $allowedActions = [
     "delete_category"    => "delete_category",
 ];
 
-if ($action === "" || !isset($allowedActions[$action])) {
+if (!isset($allowedActions[$action])) {
     sendResponse(false, "Invalid or Missing Action");
 }
 
