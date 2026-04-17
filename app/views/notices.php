@@ -96,5 +96,5 @@ $role = $_SESSION['role'] ?? "";
     const currentUserId = <?php echo $_SESSION['user_id']; ?>;
     const currentRole = '<?php echo $role; ?>';
 </script>
-<script src="../js/notices.js"></script>
+<script src="<?php echo BASE_URL; ?>js/notices.js"></script>
 <?php include 'footer.php'; ?>

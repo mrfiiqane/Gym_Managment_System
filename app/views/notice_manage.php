@@ -112,6 +112,6 @@ include 'dashboard.php';
     }
 </script>
 
-<script src="../js/notice.js"></script>
+<script src="<?php echo BASE_URL; ?>js/notice.js"></script>
 
 <?php include 'footer.php'; ?>

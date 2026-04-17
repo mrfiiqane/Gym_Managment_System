@@ -38,6 +38,7 @@ require_once __DIR__ . '/../reusable/db_crud_helper.php';
 require_once __DIR__ . '/../reusable/variables.php';
 
 
+
 //  * Check if the current user has access to a specific page
 //  * @param string $page_name The filename of the page (e.g., 'student.php')
 //  * @return bool True if user has access, redirects to 403/404 if not

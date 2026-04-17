@@ -5,19 +5,19 @@
 ![Tailwind](https://img.shields.io/badge/Tailwind-CSS-38B2AC?style=for-the-badge&logo=tailwind-css)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge&logo=github)
 
-FitCore is a high-performance, full-stack Gym Management System designed with premium aesthetics and a robust "Generic CRUD" architecture. It features a dynamic permission system, real-time AJAX interactions, and a clean backend powered by Stored Procedures.
+FitCore is a high-performance, security-focused, full-stack Gym Management System designed with premium aesthetics and a robust architecture. It features a dynamic permission system, real-time AJAX interactions, and a clean backend powered by Stored Procedures.
 
 ---
 
-## 🌐 Live Demo
+<!-- ## 🌐 Live Demo
 - **🔗 URL**: [https://fitcore-gym.com](#) *(Deploy to InfinityFree/Render to activate)*
 - **🔐 Demo Login**:
   - **Email**: `admin@test.com`
-  - **Password**: `123456`
+  - **Password**: `123456` -->
 
 ---
 
-## 📸 Screenshots
+<!-- ## 📸 Screenshots
 
 | Dashboard | Users Management |
 | :--- | :--- |
@@ -25,34 +25,26 @@ FitCore is a high-performance, full-stack Gym Management System designed with pr
 
 | Permissions System | Profile Settings |
 | :--- | :--- |
-| ![Permissions](screenshots/permissions.png) | ![Profile](screenshots/profile.png) |
+| ![Permissions](screenshots/permissions.png) | ![Profile](screenshots/profile.png) | -->
 
 ---
 
 ## 🚀 Key Features
 
-### 1. Dynamic RBAC Permission System
-The specialized sidebar adapts automatically to the user's authority level using a hierarchical mapping:
-**Category** ➔ **System Links** ➔ **System Actions** ➔ **User Authority**.
-
-### 2. High-Performance Architecture
-- **Stored Procedures (SPs)**: Core database logic is offloaded to MySQL for maximum speed and security.
-- **Generic CRUD Framework**: A unified PHP/AJAX system that handles operations for all modules, ensuring 100% DRY code.
-- **Real-time AJAX**: No page reloads for a seamless SPA-like feel.
-
-### 3. Premium UI/UX
-- **Glassmorphism Design**: Modern blurred panels and neural glow backgrounds.
-- **Bilingual Support**: Fully localized for **Somali** and **English**.
-- **Dark/Light Mode**: Full theme support with persistent preferences.
+1.  **Generic CRUD Architecture**: A unified and reusable system for all database operations (Create, Read, Update, Delete), ensuring 100% DRY (Don't Repeat Yourself) koodh.
+2.  **Dynamic RBAC Permission System**: Granular Role-Based Access Control where the sidebar and actions adapt automatically based on the user's authority level.
+3.  **Real-time AJAX Navigation**: A seamless, Single-Page Application (SPA) feel that allows users to navigate and perform actions without page reloads.
+4.  **Multi-Role Dashboards**: Specialized and personalized dashboard views for **Admins**, **Trainers**, and **Members**.
+5.  **Secure Authentication**: Enhanced security with BCRYPT password hashing and a secure session management system.
+6.  **Google OAuth Integration**: Seamless one-click login functionality using Google accounts for better user experience.
+7.  **OTP Password Recovery**: Secure password reset workflow using SMTP-based One-Time Passwords (OTP) sent to user emails.
+8.  **Comprehensive Fee Management**: A robust system to track, manage, and export gym membership payments and financial records.
+9.  **Automated Notice Board**: Centralized institutional announcements with support for expiration dates (TTL).
+10. **Performance Optimization**: Core database logic offloaded to **Stored Procedures (SPs)** for maximum execution speed and security.
+11. **Premium UI/UX Design**: A professional, state-of-the-art interface featuring **Glassmorphism**, modern typography, and smooth micro-animations.
+12. **Responsive & Bilingual**: Fully optimized for all devices (Mobile/Tablet/Desktop) with built-in support for **Somali** and **English** Translation.
 
 ---
-
-## 🧠 System Flow
-
-1. **Authentication**: User logs in; session is established with role-based tagging.
-2. **Permission Fetching**: `user_authorities.php` checks allowed actions for the user.
-3. **Menu Rendering**: `sidebar.js` calls the API and dynamically builds the menu.
-4. **Action Execution**: Every action (Create/Edit/Delete) is validated against the permission map before hitting the Stored Procedure.
 
 ---
 

@@ -1,6 +1,7 @@
 <?php
-require_once __DIR__ . '/variables.php';
+require_once __DIR__ . '/../config/init.php';
 ?>
+
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const sidebar = document.getElementById('sidebar');

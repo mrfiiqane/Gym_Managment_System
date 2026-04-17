@@ -1,17 +1,17 @@
 <?php
 require_once '../../../config/init.php';
 
-if (!is_logged_in() || $_SESSION['role'] !== 'Student') {
+if (!is_logged_in()) {
     redirect('views/Auth/login.php');
     exit;
 }
 
-include '../../includes/header.php';
-include '../../includes/sidebar.php';
-include '../../includes/loader.php';
+include '../../../reusable/header.php';
+include '../../../reusable/sidebar.php';
+include '../../../reusable/loader.php';
 ?>
 
-<link href="../../../src/output.css" rel="stylesheet">
+
 
 
 <div class="animate-fadeIn p-6 lg:p-10 space-y-10">
@@ -135,4 +135,4 @@ include '../../includes/loader.php';
 
 
 <script src="<?php echo BASE_URL; ?>js/dashboard/student.js"></script>
-<?php include '../../includes/footer.php'; ?>
+<?php include '../../../reusable/footer.php'; ?>

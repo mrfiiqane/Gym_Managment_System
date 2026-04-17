@@ -143,7 +143,7 @@ include '../reusable/loader.php';
   }
 </script>
 
-<script src="../js/system_link.js"></script>
+<script src="<?php echo BASE_URL; ?>js/system_link.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <?php include '../reusable/footer.php'; ?>

@@ -104,6 +104,8 @@ $allowedActions = [
     "authorize_user" => "authorize_user",
     "get_user_authorities" => "get_user_authorities",
     "read_all" => "read_all_authorities",
+    "read_all_generic" => "read_all_generic",
+    "read_all_authorities" => "read_all_authorities",
     "get_User_Menus" => "get_User_Menus",
 ];
 

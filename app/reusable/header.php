@@ -15,6 +15,9 @@
     
     <!-- Tailwind CSS (Generated via CLI) -->
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>src/output.css">    
+    <script>
+        window.BASE_URL = "<?php echo BASE_URL; ?>";
+    </script>
     <!-- Material Symbols -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />

@@ -1,7 +1,7 @@
 <?php
 require_once '../config/init.php';
-include 'includes/header.php';
-include 'includes/sidebar.php';
+include '../reusable/header.php';
+include '../reusable/sidebar.php';
 ?>
 
 <div class="space-y-8 animate-fadeIn ">
@@ -18,7 +18,7 @@ include 'includes/sidebar.php';
             <div class="relative group">
                 <div
                     class="w-28 h-28 md:w-36 md:h-36 rounded-[2rem] md:rounded-[2.5rem] bg-white/10 backdrop-blur-md border-4 border-white/30 overflow-hidden shadow-2xl">
-                    <img id="profileImage" src="../uploads/<?php echo $_SESSION['image'] ?? 'default.png'; ?>"
+                    <img id="profileImage" src="<?php echo BASE_URL; ?>uploads/<?php echo $_SESSION['image'] ?? 'default.png'; ?>"
                         class="w-full h-full object-cover" alt="Profile">
                 </div>
                 <label
@@ -161,6 +161,6 @@ include 'includes/sidebar.php';
     </div>
 </div>
 
-<script src="../js/profile.js"></script>
+<script src="<?php echo BASE_URL; ?>js/profile.js"></script>
 
-<?php include 'includes/footer.php'; ?>
+<?php include '../reusable/footer.php'; ?>

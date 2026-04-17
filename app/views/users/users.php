@@ -10,12 +10,12 @@ if (!has_role('Admin')) {
 }
 
 
-include '../includes/header.php';
-include '../includes/loader.php';
-include '../includes/sidebar.php';
+include '../../reusable/header.php';
+include '../../reusable/loader.php';
+include '../../reusable/sidebar.php';
 ?>
 
-<link href="../../src/output.css" rel="stylesheet">
+<link href="<?php echo BASE_URL; ?>src/output.css" rel="stylesheet">
 
 <script>
     const USER_UPLOAD_URL = "<?php echo USER_UPLOAD_URL; ?>";
@@ -194,7 +194,7 @@ include '../includes/sidebar.php';
                     <div class="relative group">
                         <div
                             class="w-20 h-20 rounded-full border-4 border-slate-50  shadow-lg overflow-hidden bg-slate-100">
-                            <img id="show" src="../../uploads/User_profile/default.png"
+                            <img id="show" src="<?php echo BASE_URL; ?>uploads/User_profile/default.png"
                                 class="w-full h-full object-cover">
                         </div>
                         <label
@@ -240,4 +240,4 @@ include '../includes/sidebar.php';
 
 
         <script src="<?php echo BASE_URL; ?>js/users/users.js"></script>
-        <?php include '../includes/footer.php'; ?>
+        <?php include '../../reusable/footer.php'; ?>

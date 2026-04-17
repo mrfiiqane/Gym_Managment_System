@@ -1,6 +1,5 @@
 <?php
 require_once '../../../config/init.php';
-require_once '../../../reusable/variables.php';
 
 if (!is_logged_in() || $current_role !== 'Trainer') {
     redirect('views/Auth/login.php');

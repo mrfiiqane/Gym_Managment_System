@@ -22,3 +22,6 @@
         
     </div>
 </footer>
+
+<script src="<?php echo BASE_URL; ?>js/sidebar.js"></script>
+

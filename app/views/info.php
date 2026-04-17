@@ -1,11 +1,11 @@
 <?php
 require_once '../config/init.php';
-include 'includes/header.php';
-include 'includes/sidebar.php';
+include '../reusable/header.php';
+include '../reusable/sidebar.php';
 ?>
 
 
-<main class="flex-1 overflow-y-auto bg-slate-50/50 dark:bg-darkBody transition-all duration-300">
+<div class="flex-1 overflow-y-auto bg-slate-50/50 transition-all duration-300">
 
   <header
     class="max-w-7xl mx-auto flex items-center justify-between rounded-2xl p-5 bg-white/50 dark:bg-darkPanel/50 backdrop-blur-md sticky top-0 z-40 border-b border-primary/5">
@@ -118,5 +118,5 @@ include 'includes/sidebar.php';
 
 
 <?php
-include 'includes/footer.php';
+include '../reusable/footer.php';
 ?>

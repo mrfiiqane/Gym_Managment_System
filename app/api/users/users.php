@@ -384,6 +384,7 @@ function generate($conn)
 $allowedActions = [
     "register_user" => "register_user",
     "read_all_users" => "read_all_users",
+    "Read_All" => "Read_All",
     "read_single_user" => "read_single_user",
     "update_user" => "update_user",
     "delete_user" => "delete_user",

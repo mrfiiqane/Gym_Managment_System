@@ -1,3 +1,6 @@
+
+let api_url = "../api/user_authorities.php";
+
 $(document).ready(function () {
   loadData();
   fill_Users();
@@ -35,7 +38,7 @@ $("#authorityArea").on("change", "input[name='system_link[]']", function () {
 });
 
 function fill_Users() {
-  AJAX.post("../api/users.php", { action: "Read_All" }, function (res) {
+  AJAX.post("../api/users/users.php", { action: "Read_All" }, function (res) {
     let response = res.data;
     let html = "";
     $("#user_id").empty();
@@ -50,7 +53,7 @@ function fill_Users() {
 }
 
 function load_Users_Permissions(id) {
-  AJAX.post("../api/user_authorities.php", { action: "get_user_authorities", user_id: id }, function (res) {
+  AJAX.post(api_url, { action: "get_user_authorities", user_id: id }, function (res) {
     let response = res.data;
     $("#authorityArea input[type='checkbox']").prop("checked", false);
     if (response && response.length >= 1) {
@@ -85,7 +88,7 @@ $("#userForm").on("submit", function (event) {
     action: "authorize_user",
   };
 
-  AJAX.post("../api/user_authorities.php", sendingData, function (res) {
+  AJAX.post(api_url, sendingData, function (res) {
     let successHTML = "<strong>Successfully! The user has been granted authorization for the following:</strong>";
     successHTML += "<ul class='list-disc ms-5 mt-2'>";
     selectedAuthority.forEach((item) => {
@@ -103,7 +106,7 @@ $("#userForm").on("submit", function (event) {
 });
 
 function loadData() {
-  AJAX.post("../api/user_authorities.php", { action: "read_all" }, function (res) {
+  AJAX.post(api_url, { action: "read_all" }, function (res) {
     let response = res.data;
     if (!response) return;
 

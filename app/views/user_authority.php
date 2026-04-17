@@ -1,13 +1,11 @@
 <?php
 require_once '../config/init.php';
-// Use reusable components as requested
 include '../reusable/header.php';
 include '../reusable/sidebar.php';
 include '../reusable/loader.php';
 ?>
 
-<main
-    class="space-y-4 animate-fadeIn  dark:bg-darkPanel w-[350px] md:w-full px-2 py-4 md:p-4 rounded-3xl shadow-sm border border-primary/5">
+<div class="space-y-4 animate-fadeIn w-full">
 
     <div class="bg-white shadow rounded-lg p-4 max-w-4xl mx-auto my-4">
         <!-- Header -->
@@ -61,9 +59,9 @@ include '../reusable/loader.php';
 
 
 
-</main>
+</div>
 
 
-<script src="../js/user_authority.js"></script>
+<script src="<?php echo BASE_URL; ?>js/user_authority.js"></script>
 
 <?php include '../reusable/footer.php'; ?>

@@ -1,3 +1,3 @@
-# Deny access to all files in this directory
-# Order deny,allow
-# Deny from all
+# Deny direct browser access to all config files (security critical!)
+Order deny,allow
+Deny from all

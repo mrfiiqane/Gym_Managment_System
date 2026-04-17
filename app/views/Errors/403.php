@@ -3,7 +3,7 @@ require_once '../../config/init.php';
 
 $redirect_url = isset($_SESSION['user_id']) ? BASE_URL . 'views/dashboard/index.php' : BASE_URL . 'views/Frontend/index.html';
 
-include '../includes/header.php';
+include '../../reusable/header.php';
 ?>
 
 <div class="min-h-screen flex items-center justify-center p-6 bg-gray-50">
@@ -22,4 +22,4 @@ include '../includes/header.php';
     </div>
 </div>
 
-<?php include '../includes/footer.php'; ?>
+<?php include '../../reusable/footer.php'; ?>
