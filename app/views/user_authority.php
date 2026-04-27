@@ -7,11 +7,11 @@ include '../reusable/loader.php';
 
 <div class="space-y-4 animate-fadeIn w-full">
 
-    <div class="bg-white shadow rounded-lg p-4 max-w-4xl mx-auto my-4">
+    <div class="bg-panel shadow rounded-lg p-4 max-w-4xl mx-auto my-4">
         <!-- Header -->
         <header class="flex items-center justify-between px-2 backdrop-blur-md border-b border-primary/5">
             <div class="flex items-center gap-4">
-                <h1 class="text-start text-3xl font-black text-blue-700 dark:text-white tracking-tight"> User Authority</h1>
+                <h1 class="text-start text-3xl font-black text-text-main tracking-tight"> User Authority</h1>
             </div>
         </header>
         <form id="userForm">
@@ -30,12 +30,12 @@ include '../reusable/loader.php';
             </div>
 
             <select name="user_id" id="user_id"
-                class="w-full my-3 rounded-lg border border-gray-300 bg-white px-5 py-2 text-md focus:ring-2 focus:ring-sky-500 focus:outline-none">
+                class="w-full my-3 rounded-lg border border-primary/10 bg-panel px-5 py-2 text-md focus:ring-2 focus:ring-sky-500 focus:outline-none">
             </select>
 
 
             <div class="w-full">
-                <fieldset class="rounded-lg border border-gray-400 p-4">
+                <fieldset class="rounded-lg border border-primary/10 p-4">
                     <legend class="px-2 text-lg font-bold Text flex items-center gap-1.5">
                         <input type="checkbox" id="all_authority" name="all_authority"
                             class="h-4 w-4 rounded-lg text-blue-600  focus:ring-blue-500">
@@ -62,6 +62,6 @@ include '../reusable/loader.php';
 </div>
 
 
-<script src="<?php echo BASE_URL; ?>js/user_authority.js"></script>
+<script src="../js/user_authority.js"></script>
 
 <?php include '../reusable/footer.php'; ?>

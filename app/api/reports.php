@@ -62,3 +62,4 @@ if (!isset($allowedActions[$action])) {
 $allowedActions[$action]($conn);
 $conn->close();
 ?>
+

@@ -1,5 +1,5 @@
 let btnAction = "Insert";
-const api_url = "../api/category.php";
+let CATEGORY_API_URL = "../../api/category.php";
 let currentPage = 1;
 let rowLimit = 8;
 
@@ -34,7 +34,7 @@ $("#category_form").on("submit", function (e) {
   let action = btnAction === "Insert" ? "register_category" : "update_category";
   form_data.append("action", action);
 
-  AJAX.post(api_url, form_data, function (res) {
+  AJAX.post(CATEGORY_API_URL, form_data, function (res) {
     if (typeof closeModal === 'function') closeModal();
     Toast.show(true, res.message);
     loadData(currentPage);
@@ -53,7 +53,7 @@ function loadData(page) {
     p_search: searchValue,
   };
 
-  AJAX.post(api_url, sendingData, function (res) {
+  AJAX.post(CATEGORY_API_URL, sendingData, function (res) {
     let response = res.data;
 
     $("#category_table thead").empty();
@@ -120,7 +120,7 @@ function FetchUser(id) {
     id: id,
   };  
   
-  AJAX.post(api_url, sendingData, function (res) {
+  AJAX.post(CATEGORY_API_URL, sendingData, function (res) {
     let response = res.data;
     if (response) {
       btnAction = "Update";
@@ -147,7 +147,7 @@ function confirmDelete(id) {
     confirmText: "Haa, tirtir",
     cancelText: "Iska daa",
     onConfirm: function () {
-      AJAX.post(api_url, { action: "delete_category", id: id }, function (res) {
+      AJAX.post(CATEGORY_API_URL, { action: "delete_category", id: id }, function (res) {
         Toast.show(true, res.message);
         loadData(currentPage);
       });

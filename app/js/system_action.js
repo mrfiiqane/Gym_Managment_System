@@ -1,5 +1,5 @@
 let btnAction = "Insert";
-const api_url = "../api/system_actions.php";
+let SYSTEM_ACTION_API_URL = "../../api/system_actions.php";
 let currentPage = 1;
 let rowLimit = 8;
 
@@ -33,7 +33,7 @@ $("#actions_form").on("submit", function (e) {
   let action = btnAction === "Insert" ? "register_actions" : "update_actions";
   form_data.append("action", action);
 
-  AJAX.post(api_url, form_data, function (res) {
+  AJAX.post(SYSTEM_ACTION_API_URL, form_data, function (res) {
     if (typeof closeModal === 'function') closeModal();
     Toast.show(true, res.message);
     loadData(currentPage);
@@ -52,7 +52,7 @@ function loadData(page) {
     p_search: searchValue,
   };
 
-  AJAX.post(api_url, sendingData, function (res) {
+  AJAX.post(SYSTEM_ACTION_API_URL, sendingData, function (res) {
     let response = res.data;
 
     $("#actions_table thead").empty();
@@ -106,7 +106,7 @@ function loadData(page) {
 }
 
 function fillLinks() {
-  AJAX.post("../api/system_links.php", { action: "read_all" }, function (res) {
+  AJAX.post("../../api/system_links.php", { action: "read_all" }, function (res) {
     let response = res.data;
     let html = "";
     if (response) {
@@ -119,7 +119,7 @@ function fillLinks() {
 }
 
 function FetchUser(id) {
-  AJAX.post(api_url, { action: "read_info", id: id }, function (res) {
+  AJAX.post(SYSTEM_ACTION_API_URL, { action: "read_info", id: id }, function (res) {
     let response = res.data;
     if (response) {
       btnAction = "Update";
@@ -143,7 +143,7 @@ function confirmDelete(id) {
     confirmText: "Haa, tirtir",
     cancelText: "Iska daa",
     onConfirm: function () {
-      AJAX.post(api_url, { action: "delete_actions", id: id }, function (res) {
+      AJAX.post(SYSTEM_ACTION_API_URL, { action: "delete_actions", id: id }, function (res) {
         Toast.show(true, res.message);
         loadData(currentPage);
       });

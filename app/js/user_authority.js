@@ -1,4 +1,3 @@
-
 let api_url = "../api/user_authorities.php";
 
 $(document).ready(function () {
@@ -119,19 +118,19 @@ function loadData() {
       if (item.category !== role) {
         if (role !== "") html += `</div></fieldset>`;
         html += `
-          <fieldset class="border border-slate-200 dark:border-white/10 rounded-2xl p-4 mb-4 bg-slate-50/50 dark:bg-white/5">
-            <legend class="font-bold text-slate-700 dark:text-slate-300 mb-2 flex items-center gap-2 px-2 pb-1">
-              <input type="checkbox" class="w-4 h-4 text-primary rounded bg-white dark:bg-darkPanel border-slate-300 focus:ring-primary/50" name="category_authority[]" value="${item.category}">
+          <fieldset class="border border-slate-200 rounded-2xl p-4 mb-4 bg-panel-soft/50">
+            <legend class="font-bold text-slate-700 mb-2 flex items-center gap-2 px-2 pb-1">
+              <input type="checkbox" class="w-4 h-4 text-primary rounded bg-panel border-slate-300 focus:ring-primary/50" name="category_authority[]" value="${item.category}">
               ${item.category}
             </legend>
-            <div class="ml-4 text-sm text-slate-500 flex flex-col gap-3">`;
+            <div class="ml-4 text-sm text-text-soft flex flex-col gap-3">`;
         role = item.category;
       }
 
       if (item.name !== system_link) {
         html += `
-          <div class="flex items-center px-3 py-2 bg-white dark:bg-darkPanel border border-slate-100 dark:border-white/5 rounded-xl shadow-sm">
-            <label class="flex items-center gap-3 cursor-pointer text-slate-600 dark:text-slate-400 font-medium">
+          <div class="flex items-center px-3 py-2 bg-panel border border-slate-100 rounded-xl shadow-sm">
+            <label class="flex items-center gap-3 cursor-pointer text-slate-600 font-medium">
               <input type="checkbox" class="w-4 h-4 text-primary rounded" name="system_link[]" category="${item.category}" value="${item.link_id}" category_id="${item.category_id}" link_id="${item.link_id}">
               ${item.name}
             </label>
@@ -142,7 +141,7 @@ function loadData() {
       if (item.action_name !== system_action) {
         html += `
           <div class="ml-8 my-1 flex flex-col gap-1 text-[13px]">
-            <label class="flex items-center gap-3 cursor-pointer text-slate-500 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 transition-colors">
+            <label class="flex items-center gap-3 cursor-pointer text-text-soft hover:text-slate-700:text-slate-300 transition-colors">
               <input type="checkbox" name="system_action[]" class="w-4 h-4 text-primary rounded" category="${item.category}" value="${item.action_id}" category_id="${item.category_id}" link_id="${item.link_id}" action_id="${item.action_id}">
               ${item.action_name}
             </label>

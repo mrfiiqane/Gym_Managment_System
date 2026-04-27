@@ -83,17 +83,54 @@ function get_user_authorities($conn)
 function get_User_Menus($conn)
 {
     $user_id = $_SESSION['user_id'] ?? '';
+    $role = $_SESSION['role'] ?? '';
 
     if (empty($user_id)) {
         sendResponse(false, "Your session is invalid or expired please login.");
     }
 
-    $data = db_read_all_sp($conn, 'get_user_menu_sp', [$user_id]);
+    // Always include a default Dashboard for everyone
+    $data = [
+        [
+            "category_name" => "Main Dashboard",
+            "category_icon" => "dashboard",
+            "link" => "dashboard/index.php",
+            "link_name" => "Dashboard"
+        ]
+    ];
 
-    if ($data !== false) {
+    if ($role === 'Admin') {
+        // Fetch ALL links dynamically from the system for Admin
+        $sql = "SELECT c.name as category_name, c.icon as category_icon, 
+                       l.link as link, l.name as link_name 
+                FROM category c 
+                JOIN system_links l ON c.id = l.category_id 
+                WHERE l.link NOT LIKE '%dashboard%' 
+                ORDER BY c.id ASC";
+        $result = $conn->query($sql);
+
+        if ($result && $result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $data[] = $row;
+            }
+        }
+    } else {
+        // Standard users must be explicitly permitted
+        $user_menus = db_read_all_sp($conn, 'get_user_menu_sp', [$user_id]);
+        if ($user_menus && is_array($user_menus)) {
+            foreach ($user_menus as $menu) {
+                // Prevent duplicate dashboard if it already somehow exists in DB
+                if (strpos($menu['link'], 'dashboard') === false) {
+                    $data[] = $menu;
+                }
+            }
+        }
+    }
+
+    if ($data !== false && is_array($data) && count($data) > 0) {
         sendResponse(true, "User menus fetched successfully", $data);
     } else {
-        sendResponse(false, "Failed to fetch menus via SP");
+        sendResponse(false, "Failed to fetch menus or no menus assigned");
     }
 }
 

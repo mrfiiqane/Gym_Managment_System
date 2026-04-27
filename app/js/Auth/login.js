@@ -41,6 +41,7 @@ $("#loginForm").on("submit", function (e) {
       Toast.show(true, res.message || "Login Successful!");
 
       let redirectUrl = "../../views/dashboard/admin/index.php"; // default
+      $("#loginForm")[0].reset();
       if (res.data && res.data.redirect) {
         redirectUrl = res.data.redirect;
       }

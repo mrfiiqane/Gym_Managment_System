@@ -57,60 +57,60 @@ include '../reusable/sidebar.php';
     </div>
 
     <!-- Edit Profile Section -->
-    <div class="bg-white dark:bg-darkPanel rounded-[3rem] shadow-sm border border-primary/5 overflow-hidden">
+    <div class="bg-panel dark:bg-dark-panel rounded-[3rem] shadow-sm border border-primary/5 overflow-hidden">
         <div class="p-8 border-b border-primary/5">
-            <h2 class="text-2xl font-black text-slate-800 dark:text-white tracking-tight">Edit Profile Information</h2>
-            <p class="text-xs text-slate-400 font-bold uppercase tracking-widest mt-1">Update your personal details</p>
+            <h2 class="text-2xl font-black text-text-main dark:text-white tracking-tight">Edit Profile Information</h2>
+            <p class="text-xs text-text-soft dark:text-white/60 font-bold uppercase tracking-widest mt-1">Update your personal details</p>
         </div>
 
         <div class="p-8">
             <form id="profile_form" class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="space-y-2">
-                    <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Full Name</label>
+                    <label class="text-[10px] font-bold text-text-soft uppercase tracking-widest ml-1">Full Name</label>
                     <input type="text" name="full_name" id="full_name"
                         value="<?php echo $_SESSION['full_name'] ?? ''; ?>" required
-                        class="w-full p-4 bg-slate-50 dark:bg-white/5 rounded-2xl outline-none focus:ring-2 focus:ring-primary/20 transition-all font-bold text-sm">
+                        class="w-full p-4 bg-panel-soft dark:bg-dark-bg rounded-xl border border-primary/10 dark:border-dark-border outline-none focus:ring-2 focus:ring-primary/20 transition-all font-bold text-sm">
                 </div>
 
                 <div class="space-y-2">
-                    <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Phone
+                    <label class="text-[10px] font-bold text-text-soft uppercase tracking-widest ml-1">Phone
                         Number</label>
                     <input type="text" name="phone" id="phone" value="<?php echo $_SESSION['phone'] ?? ''; ?>"
-                        class="w-full p-4 bg-slate-50 dark:bg-white/5 rounded-2xl outline-none focus:ring-2 focus:ring-primary/20 transition-all font-bold text-sm">
+                        class="w-full p-4 bg-panel-soft dark:bg-dark-bg rounded-xl border border-primary/10 dark:border-dark-border outline-none focus:ring-2 focus:ring-primary/20 transition-all font-bold text-sm">
                 </div>
 
                 <div class="space-y-2">
-                    <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Username</label>
+                    <label class="text-[10px] font-bold text-text-soft uppercase tracking-widest ml-1">Username</label>
                     <input type="text" name="username" id="username" value="<?php echo $_SESSION['username']; ?>"
                         required
-                        class="w-full p-4 bg-slate-50 dark:bg-white/5 rounded-2xl outline-none focus:ring-2 focus:ring-primary/20 transition-all font-bold text-sm">
+                        class="w-full p-4 bg-panel-soft dark:bg-dark-bg rounded-xl border border-primary/10 dark:border-dark-border outline-none focus:ring-2 focus:ring-primary/20 transition-all font-bold text-sm">
                 </div>
 
                 <div class="space-y-2">
-                    <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Email
+                    <label class="text-[10px] font-bold text-text-soft uppercase tracking-widest ml-1">Email
                         Address</label>
                     <input type="email" name="email" id="email" value="<?php echo $_SESSION['email']; ?>" required
-                        class="w-full p-4 bg-slate-50 dark:bg-white/5 rounded-2xl outline-none focus:ring-2 focus:ring-primary/20 transition-all font-bold text-sm">
+                        class="w-full p-4 bg-panel-soft dark:bg-dark-bg rounded-xl border border-primary/10 dark:border-dark-border outline-none focus:ring-2 focus:ring-primary/20 transition-all font-bold text-sm">
                 </div>
 
                 <div class="space-y-2">
-                    <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">New
+                    <label class="text-[10px] font-bold text-text-soft uppercase tracking-widest ml-1">New
                         Password</label>
                     <input type="password" name="password" id="password" placeholder="Leave blank to keep current"
-                        class="w-full p-4 bg-slate-50 dark:bg-white/5 rounded-2xl outline-none focus:ring-2 focus:ring-primary/20 transition-all font-bold text-sm">
+                        class="w-full p-4 bg-panel-soft dark:bg-dark-bg rounded-xl border border-primary/10 dark:border-dark-border outline-none focus:ring-2 focus:ring-primary/20 transition-all font-bold text-sm">
                 </div>
 
                 <div class="space-y-2">
-                    <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">Confirm
+                    <label class="text-[10px] font-bold text-text-soft uppercase tracking-widest ml-1">Confirm
                         Password</label>
                     <input type="password" name="confirm_password" id="confirm_password"
                         placeholder="Confirm new password"
-                        class="w-full p-4 bg-slate-50 dark:bg-white/5 rounded-2xl outline-none focus:ring-2 focus:ring-primary/20 transition-all font-bold text-sm">
+                        class="w-full p-4 bg-panel-soft dark:bg-dark-bg rounded-xl border border-primary/10 dark:border-dark-border outline-none focus:ring-2 focus:ring-primary/20 transition-all font-bold text-sm">
                 </div>
 
                 <div class="md:col-span-2 flex justify-end gap-4 pt-4">
                     <button type="reset"
-                        class="px-8 py-4 text-slate-400 font-bold text-sm hover:text-slate-600 transition-all">Reset</button>
+                        class="px-8 py-4 text-text-soft font-bold text-sm hover:text-text-main transition-all">Reset</button>
                     <button type="submit"
                         class="px-12 py-4 bg-primary text-white font-black rounded-2xl hover:bg-primary/90 shadow-2xl shadow-primary/30 transition-all text-sm uppercase tracking-widest">Save
                         Changes</button>
@@ -121,40 +121,40 @@ include '../reusable/sidebar.php';
 
     <!-- Account Activity -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="bg-white dark:bg-darkPanel p-8 rounded-[3rem] border border-primary/5 shadow-sm">
+        <div class="bg-panel dark:bg-dark-panel p-8 rounded-[3rem] border border-primary/5 shadow-sm">
             <div class="flex items-center gap-4 mb-4">
                 <div class="p-4 bg-blue-50 dark:bg-blue-500/10 rounded-2xl text-blue-500">
                     <span class="material-symbols-outlined text-2xl">schedule</span>
                 </div>
                 <div>
-                    <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest">Member Since</h3>
-                    <p class="text-lg font-bold text-slate-800 dark:text-white">
+                    <h3 class="text-xs font-black text-text-soft uppercase tracking-widest">Member Since</h3>
+                    <p class="text-lg font-bold text-text-main dark:text-white">
                         <?php echo date('M Y', strtotime($_SESSION['created_at'] ?? 'now')); ?>
                     </p>
                 </div>
             </div>
         </div>
 
-        <div class="bg-white dark:bg-darkPanel p-8 rounded-[3rem] border border-primary/5 shadow-sm">
+        <div class="bg-panel dark:bg-dark-panel p-8 rounded-[3rem] border border-primary/5 shadow-sm">
             <div class="flex items-center gap-4 mb-4">
                 <div class="p-4 bg-green-50 dark:bg-green-500/10 rounded-2xl text-green-500">
                     <span class="material-symbols-outlined text-2xl">verified_user</span>
                 </div>
                 <div>
-                    <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest">Account Status</h3>
+                    <h3 class="text-xs font-black text-text-soft uppercase tracking-widest">Account Status</h3>
                     <p class="text-lg font-bold text-green-600">Verified</p>
                 </div>
             </div>
         </div>
 
-        <div class="bg-white dark:bg-darkPanel p-8 rounded-[3rem] border border-primary/5 shadow-sm">
+        <div class="bg-panel dark:bg-dark-panel p-8 rounded-[3rem] border border-primary/5 shadow-sm">
             <div class="flex items-center gap-4 mb-4">
                 <div class="p-4 bg-purple-50 dark:bg-purple-500/10 rounded-2xl text-purple-500">
                     <span class="material-symbols-outlined text-2xl">fingerprint</span>
                 </div>
                 <div>
-                    <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest">User ID</h3>
-                    <p class="text-lg font-bold text-slate-800 dark:text-white"><?php echo $_SESSION['user_id']; ?></p>
+                    <h3 class="text-xs font-black text-text-soft uppercase tracking-widest">User ID</h3>
+                    <p class="text-lg font-bold text-text-main dark:text-white"><?php echo $_SESSION['user_id']; ?></p>
                 </div>
             </div>
         </div>

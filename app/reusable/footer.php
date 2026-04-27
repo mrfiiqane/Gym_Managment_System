@@ -1,3 +1,4 @@
+</main>
 <footer class="mt-auto px-4 sm:px-8 py-6 w-full shrink-0">
     <div class="bg-white rounded-[20px] border border-slate-200/60 p-5 sm:p-6 flex flex-col md:flex-row justify-between items-center gap-4 shadow-[0_4px_30px_rgba(0,0,0,0.03)] transition-all hover:shadow-[0_8px_40px_rgba(0,0,0,0.05)]">
         
@@ -23,5 +24,5 @@
     </div>
 </footer>
 
-<script src="<?php echo BASE_URL; ?>js/sidebar.js"></script>
+<script src="<?php echo BASE_URL; ?>reusable/sidebar.js"></script>
 

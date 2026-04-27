@@ -1,6 +1,5 @@
 <?php
 require_once '../config/init.php';
-// Note: response.php, validator.php, and db_crud_helper.php are waxay ku jiran init.php 
 
 $action = validate($_POST['action'] ?? "");
 
@@ -116,3 +115,4 @@ if (!isset($allowedActions[$action])) {
 
 $allowedActions[$action]($conn);
 $conn->close();
+
