@@ -81,13 +81,12 @@ Gym_Managment_System/
 │   │   ├── conn.php             # Database connection
 │   │   ├── init.php             # Global app initialization
 │   │   ├── security.php         # Security functions & session guards
-│   │   └── gym_managment_system (2).sql # Database schema & SPs
+│   │   └── gym_managment_system (3).sql # Database schema & SPs
 │   ├── js/                      # Module-specific JavaScript
 │   │   ├── category.js          # AJAX for categories
 │   │   ├── system_link.js       # AJAX for links
 │   │   ├── system_action.js     # AJAX for actions
 │   │   ├── user_authority.js    # AJAX for permissions
-│   │   ├── sidebar.js           # AJAX for menu rendering
 │   │   ├── dashboard.js         # AJAX for dashboard stats
 │   │   ├── profile.js           # AJAX for profile updates
 │   │   └── notice.js            # AJAX for notices
@@ -97,6 +96,7 @@ Gym_Managment_System/
 │   │   ├── footer.php           # Global footer & scripts
 │   │   ├── db_crud_helper.php   # Generic CRUD functions (PHP)
 │   │   ├── helper.js            # AJAX wrappers & UI Helpers (Toast/Confirm)
+│   │   ├── sidebar.js           # AJAX for menu rendering
 │   │   ├── validator.php        # Server-side validation helpers
 │   │   ├── response.php         # JSON response standardization
 │   │   ├── variables.php        # Shared PHP variables
@@ -114,6 +114,7 @@ Gym_Managment_System/
 │       └── notices.php          # Announcement UI
 ├── tailwind.config.js           # TailwindCSS configuration
 ├── .env                         # Environment variables (SMTP, DB)
+├── list_links.php               # Links listing helper
 └── index.php                    # Application entry point (Landing Page)
 ```
 
@@ -128,7 +129,7 @@ Gym_Managment_System/
 
 ### 🚀 Installation Steps
 1. **Clone**: `git clone https://github.com/mrfiiqane/Gym_Managment_System.git`
-2. **Database**: Import `app/config/gym_managment_system (2).sql` into your PHPMyAdmin.
+2. **Database**: Import `app/config/gym_managment_system (3).sql` into your PHPMyAdmin.
 3. **Environment**: Update your `.env` file:
    ```env
    DB_HOST=localhost
